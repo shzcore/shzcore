@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Shzcore's Notes" />
+  <meta name="keywords" content="Spark内核源码,Spark配置," />
 
 
 
@@ -96,16 +96,22 @@
 
 
 
-<meta name="description" content="付出不亚于任何人的努力">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shzcore&#39;s Notes">
-<meta property="og:url" content="http://51nw.net/index.html">
+<meta name="description" content="Welcome to Hexo! This is your very first post.">
+<meta name="keywords" content="Spark内核源码,Spark配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark内核源码">
+<meta property="og:url" content="http://51nw.net/2017/08/22/Spark/index.html">
 <meta property="og:site_name" content="Shzcore&#39;s Notes">
-<meta property="og:description" content="付出不亚于任何人的努力">
+<meta property="og:description" content="Welcome to Hexo! This is your very first post.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/1w20aEc.png">
+<meta property="og:image" content="http://i.imgur.com/QV4RozK.png">
+<meta property="og:image" content="http://i.imgur.com/9jaT3e0.png">
+<meta property="og:updated_time" content="2017-08-23T02:22:04.505Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shzcore&#39;s Notes">
-<meta name="twitter:description" content="付出不亚于任何人的努力">
+<meta name="twitter:title" content="Spark内核源码">
+<meta name="twitter:description" content="Welcome to Hexo! This is your very first post.">
+<meta name="twitter:image" content="http://i.imgur.com/1w20aEc.png">
 
 
 
@@ -134,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://51nw.net/"/>
+  <link rel="canonical" href="http://51nw.net/2017/08/22/Spark/"/>
 
 
 
 
 
-  <title>Shzcore's Notes</title>
+  <title>Spark内核源码 | Shzcore's Notes</title>
   
 
 
@@ -165,9 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -304,9 +308,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -336,9 +340,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/22/Spark/" itemprop="url">Spark内核源码</a></h1>
+          <h1 class="post-title" itemprop="name headline">Spark内核源码</h1>
         
 
         <div class="post-meta">
@@ -393,7 +395,7 @@
               </span>
               
                 <a href="/2017/08/22/Spark/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://51nw.net/2017/08/22/Spark/" class="cy_cmt_count" data-xid="2017/08/22/Spark/" itemprop="commentsCount" ></span>
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/22/Spark/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -414,6 +416,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
 
@@ -432,16 +439,394 @@
       
 
       
-        
-          <p>Welcome to Hexo! This is your very first post.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/22/Spark/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>Welcome to Hexo! This is your very first post.<br><a id="more"></a><br>Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.</p>
+<h2 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h2><h3 id="Spark部署发布"><a href="#Spark部署发布" class="headerlink" title="Spark部署发布"></a>Spark部署发布</h3><ol>
+<li>IDEA pom.xml文件配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spark-sql_2.11&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;2.1.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line"></div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;mysql&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;5.1.8&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">  &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">  &lt;artifactId&gt;spark-hive_2.11&lt;/artifactId&gt;</div><div class="line">  &lt;version&gt;2.1.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>Spark打包编译</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C:\Users\win10\Desktop\software\apache-maven-3.3.9-bin\apache-maven-3.3.9\bin\mvn clean package -DskipTests</div></pre></td></tr></table></figure>
+<ol>
+<li><p>Spark提交 SQLContext</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./spark-submit \</div><div class="line">--class com.spark.SQLContextApp \</div><div class="line">--master local[2] \</div><div class="line">/home/hadoop/data/sparker-1.0-SNAPSHOT.jar \</div><div class="line">/home/hadoop/data/people.json</div></pre></td></tr></table></figure>
+</li>
+<li><p>Spark提交 HiveContext</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">./spark-submit \</div><div class="line">--class com.spark.HiveContextApp \</div><div class="line">--master local[2] \</div><div class="line">/home/hadoop/data/sparker-1.0-SNAPSHOT.jar</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意:报错没有数据库驱动需要加 –jars 数据库驱动地址</p>
+<ol>
+<li>Spark thriftServer和beeline的使用</li>
+<li>启动thriftServer /sbin/thriftserver.sh</li>
+<li><p>启动beeline   /bin/beeline -u jdbc:hive2://localhost:10000 -n hadoop</p>
+</li>
+<li><p>DataFrame和RDD的一个对比<br>DataFrame转化成逻辑执行计划python java编写的程序执行速度是一样的<br>RDD不同语言运行在不同的环境中</p>
+</li>
+<li><p>DataFrame和RDD的操作方式</p>
+</li>
+<li>反射的方式: case class 前提是事先需要知道字段和字段的类型</li>
+<li>编程的方式: Row  如果第一种方式不能满足需求(事先不知道列)</li>
+<li>选型:优先考虑第一种</li>
+</ol>
+<ol>
+<li><p>其他<br>一般日主处理需要进行分区,按照天分区或者小时分钟进行分区</p>
+</li>
+<li><p>在idea加载jar包（mvn项目）</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn install:install-file -Dfile=D:\sparker -DgroupId=com.ggstar -DartifactId=ipdatabase -Dversion=1.0 -Dpackaging=jar</div></pre></td></tr></table></figure>
+<h3 id="Spark运行模式"><a href="#Spark运行模式" class="headerlink" title="Spark运行模式"></a>Spark运行模式</h3><ol>
+<li>local 开发时候使用</li>
+<li>standlone如果是一个集群是Standlone模式的话,那么需要多台的机器上同时部署spark环境,Spark自带的模式</li>
+<li>yarn模式(在生产上建议使用)</li>
+</ol>
+<h3 id="Spark架构原理"><a href="#Spark架构原理" class="headerlink" title="Spark架构原理"></a>Spark架构原理</h3><p>架构原理:<br><img src="http://i.imgur.com/1w20aEc.png" alt=""></p>
+<ul>
+<li>Driver(会初始化操作，在这个过程中，就会发送请求到Master上,进行spark应用程序注册,说白了就是让master知道,有新的master程序要运行)</li>
+<li>Master(Master收到请求到注册申请之后,会发送请求到Worker进行资源的调整和分配,资源分配就是executor分配)</li>
+<li>Worker(启动executor,和进行RDD的存储)</li>
+<li>Executor(启动之后会向Driver进行反注册,这样Driver就知道那些Executor为他服务)</li>
+<li>Task</li>
+</ul>
+<h3 id="transformation-和-action操作"><a href="#transformation-和-action操作" class="headerlink" title="transformation 和 action操作"></a>transformation 和 action操作</h3><ol>
+<li><p>流程图<br><img src="http://i.imgur.com/QV4RozK.png" alt="">  </p>
+</li>
+<li><p>transformation操作函数:map,filter,flatMap,groupByKey,reduceByKey,sortByKey,join,cogroup;</p>
+</li>
+</ol>
+<p>代码示例:    </p>
+<p>`</p>
+<pre><code>    public static void main(String[] args) {
+    // 编写Spark应用程序
+    // 本地执行，是可以执行在eclipse中的main方法中，执行的
+
+    // 第一步：创建SparkConf对象，设置Spark应用的配置信息
+    // 使用setMaster()可以设置Spark应用程序要连接的Spark集群的master节点的url
+    // 但是如果设置为local则代表，在本地运行
+    SparkConf conf = new SparkConf()
+            .setAppName(&quot;WordCountLocal&quot;)
+            .setMaster(&quot;local&quot;);  
+
+    // 第二步：创建JavaSparkContext对象
+    // 在Spark中，SparkContext是Spark所有功能的一个入口，你无论是用java、scala，甚至是python编写
+        // 都必须要有一个SparkContext，它的主要作用，包括初始化Spark应用程序所需的一些核心组件，包括
+        // 调度器（DAGSchedule、TaskScheduler），还会去到Spark Master节点上进行注册，等等
+    // 一句话，SparkContext，是Spark应用中，可以说是最最重要的一个对象
+    // 但是呢，在Spark中，编写不同类型的Spark应用程序，使用的SparkContext是不同的，如果使用scala，
+        // 使用的就是原生的SparkContext对象
+        // 但是如果使用Java，那么就是JavaSparkContext对象
+        // 如果是开发Spark SQL程序，那么就是SQLContext、HiveContext
+        // 如果是开发Spark Streaming程序，那么就是它独有的SparkContext
+        // 以此类推
+    JavaSparkContext sc = new JavaSparkContext(conf);
+
+    // 第三步：要针对输入源（hdfs文件、本地文件，等等），创建一个初始的RDD
+    // 输入源中的数据会打散，分配到RDD的每个partition中，从而形成一个初始的分布式的数据集
+    // 我们这里呢，因为是本地测试，所以呢，就是针对本地文件
+    // SparkContext中，用于根据文件类型的输入源创建RDD的方法，叫做textFile()方法
+    // 在Java中，创建的普通RDD，都叫做JavaRDD
+    // 在这里呢，RDD中，有元素这种概念，如果是hdfs或者本地文件呢，创建的RDD，每一个元素就相当于
+    // 是文件里的一行
+    JavaRDD&lt;String&gt; lines = sc.textFile(&quot;C://Users//Administrator//Desktop//spark.txt&quot;);
+
+    // 第四步：对初始RDD进行transformation操作，也就是一些计算操作
+    // 通常操作会通过创建function，并配合RDD的map、flatMap等算子来执行
+    // function，通常，如果比较简单，则创建指定Function的匿名内部类
+    // 但是如果function比较复杂，则会单独创建一个类，作为实现这个function接口的类
+
+    // 先将每一行拆分成单个的单词
+    // FlatMapFunction，有两个泛型参数，分别代表了输入和输出类型
+    // 我们这里呢，输入肯定是String，因为是一行一行的文本，输出，其实也是String，因为是每一行的文本
+    // 这里先简要介绍flatMap算子的作用，其实就是，将RDD的一个元素，给拆分成一个或多个元素
+    JavaRDD&lt;String&gt; words = lines.flatMap(new FlatMapFunction&lt;String, String&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Iterable&lt;String&gt; call(String line) throws Exception {
+            return Arrays.asList(line.split(&quot; &quot;));  
+        }
+
+    });
+
+    // 接着，需要将每一个单词，映射为(单词, 1)的这种格式
+        // 因为只有这样，后面才能根据单词作为key，来进行每个单词的出现次数的累加
+    // mapToPair，其实就是将每个元素，映射为一个(v1,v2)这样的Tuple2类型的元素
+        // 如果大家还记得scala里面讲的tuple，那么没错，这里的tuple2就是scala类型，包含了两个值
+    // mapToPair这个算子，要求的是与PairFunction配合使用，第一个泛型参数代表了输入类型
+        // 第二个和第三个泛型参数，代表的输出的Tuple2的第一个值和第二个值的类型
+    // JavaPairRDD的两个泛型参数，分别代表了tuple元素的第一个值和第二个值的类型
+    JavaPairRDD&lt;String, Integer&gt; pairs = words.mapToPair(
+
+            new PairFunction&lt;String, String, Integer&gt;() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public Tuple2&lt;String, Integer&gt; call(String word) throws Exception {
+                    return new Tuple2&lt;String, Integer&gt;(word, 1);
+                }
+
+            });
+
+    // 接着，需要以单词作为key，统计每个单词出现的次数
+    // 这里要使用reduceByKey这个算子，对每个key对应的value，都进行reduce操作
+    // 比如JavaPairRDD中有几个元素，分别为(hello, 1) (hello, 1) (hello, 1) (world, 1)
+    // reduce操作，相当于是把第一个值和第二个值进行计算，然后再将结果与第三个值进行计算
+    // 比如这里的hello，那么就相当于是，首先是1 + 1 = 2，然后再将2 + 1 = 3
+    // 最后返回的JavaPairRDD中的元素，也是tuple，但是第一个值就是每个key，第二个值就是key的value
+    // reduce之后的结果，相当于就是每个单词出现的次数
+    JavaPairRDD&lt;String, Integer&gt; wordCounts = pairs.reduceByKey(
+
+            new Function2&lt;Integer, Integer, Integer&gt;() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public Integer call(Integer v1, Integer v2) throws Exception {
+                    return v1 + v2;
+                }
+
+            });
+
+    // 到这里为止，我们通过几个Spark算子操作，已经统计出了单词的次数
+    // 但是，之前我们使用的flatMap、mapToPair、reduceByKey这种操作，都叫做transformation操作
+    // 一个Spark应用中，光是有transformation操作，是不行的，是不会执行的，必须要有一种叫做action
+    // 接着，最后，可以使用一种叫做action操作的，比如说，foreach，来触发程序的执行
+    wordCounts.foreach(new VoidFunction&lt;Tuple2&lt;String,Integer&gt;&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void call(Tuple2&lt;String, Integer&gt; wordCount) throws Exception {
+            System.out.println(wordCount._1 + &quot; appeared &quot; + wordCount._2 + &quot; times.&quot;);    
+        }
+
+    });
+
+    sc.close();
+}
+</code></pre><p>`</p>
+<ol>
+<li>action操作函数:reduce,collect,count,take,saveAsTextFile,countByKey,foreach</li>
+</ol>
+<pre><code>`
+
+    public static void main(String[] args) {
+    // 编写Spark应用程序
+    // 本地执行，是可以执行在eclipse中的main方法中，执行的
+
+    // 第一步：创建SparkConf对象，设置Spark应用的配置信息
+    // 使用setMaster()可以设置Spark应用程序要连接的Spark集群的master节点的url
+    // 但是如果设置为local则代表，在本地运行
+    SparkConf conf = new SparkConf()
+            .setAppName(&quot;WordCountLocal&quot;)
+            .setMaster(&quot;local&quot;);  
+
+    // 第二步：创建JavaSparkContext对象
+    // 在Spark中，SparkContext是Spark所有功能的一个入口，你无论是用java、scala，甚至是python编写
+        // 都必须要有一个SparkContext，它的主要作用，包括初始化Spark应用程序所需的一些核心组件，包括
+        // 调度器（DAGSchedule、TaskScheduler），还会去到Spark Master节点上进行注册，等等
+    // 一句话，SparkContext，是Spark应用中，可以说是最最重要的一个对象
+    // 但是呢，在Spark中，编写不同类型的Spark应用程序，使用的SparkContext是不同的，如果使用scala，
+        // 使用的就是原生的SparkContext对象
+        // 但是如果使用Java，那么就是JavaSparkContext对象
+        // 如果是开发Spark SQL程序，那么就是SQLContext、HiveContext
+        // 如果是开发Spark Streaming程序，那么就是它独有的SparkContext
+        // 以此类推
+    JavaSparkContext sc = new JavaSparkContext(conf);
+
+    // 第三步：要针对输入源（hdfs文件、本地文件，等等），创建一个初始的RDD
+    // 输入源中的数据会打散，分配到RDD的每个partition中，从而形成一个初始的分布式的数据集
+    // 我们这里呢，因为是本地测试，所以呢，就是针对本地文件
+    // SparkContext中，用于根据文件类型的输入源创建RDD的方法，叫做textFile()方法
+    // 在Java中，创建的普通RDD，都叫做JavaRDD
+    // 在这里呢，RDD中，有元素这种概念，如果是hdfs或者本地文件呢，创建的RDD，每一个元素就相当于
+    // 是文件里的一行
+    JavaRDD&lt;String&gt; lines = sc.textFile(&quot;C://Users//Administrator//Desktop//spark.txt&quot;);
+
+    // 第四步：对初始RDD进行transformation操作，也就是一些计算操作
+    // 通常操作会通过创建function，并配合RDD的map、flatMap等算子来执行
+    // function，通常，如果比较简单，则创建指定Function的匿名内部类
+    // 但是如果function比较复杂，则会单独创建一个类，作为实现这个function接口的类
+
+    // 先将每一行拆分成单个的单词
+    // FlatMapFunction，有两个泛型参数，分别代表了输入和输出类型
+    // 我们这里呢，输入肯定是String，因为是一行一行的文本，输出，其实也是String，因为是每一行的文本
+    // 这里先简要介绍flatMap算子的作用，其实就是，将RDD的一个元素，给拆分成一个或多个元素
+    JavaRDD&lt;String&gt; words = lines.flatMap(new FlatMapFunction&lt;String, String&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Iterable&lt;String&gt; call(String line) throws Exception {
+            return Arrays.asList(line.split(&quot; &quot;));  
+        }
+
+    });
+
+    // 接着，需要将每一个单词，映射为(单词, 1)的这种格式
+        // 因为只有这样，后面才能根据单词作为key，来进行每个单词的出现次数的累加
+    // mapToPair，其实就是将每个元素，映射为一个(v1,v2)这样的Tuple2类型的元素
+        // 如果大家还记得scala里面讲的tuple，那么没错，这里的tuple2就是scala类型，包含了两个值
+    // mapToPair这个算子，要求的是与PairFunction配合使用，第一个泛型参数代表了输入类型
+        // 第二个和第三个泛型参数，代表的输出的Tuple2的第一个值和第二个值的类型
+    // JavaPairRDD的两个泛型参数，分别代表了tuple元素的第一个值和第二个值的类型
+    JavaPairRDD&lt;String, Integer&gt; pairs = words.mapToPair(
+
+            new PairFunction&lt;String, String, Integer&gt;() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public Tuple2&lt;String, Integer&gt; call(String word) throws Exception {
+                    return new Tuple2&lt;String, Integer&gt;(word, 1);
+                }
+
+            });
+
+    // 接着，需要以单词作为key，统计每个单词出现的次数
+    // 这里要使用reduceByKey这个算子，对每个key对应的value，都进行reduce操作
+    // 比如JavaPairRDD中有几个元素，分别为(hello, 1) (hello, 1) (hello, 1) (world, 1)
+    // reduce操作，相当于是把第一个值和第二个值进行计算，然后再将结果与第三个值进行计算
+    // 比如这里的hello，那么就相当于是，首先是1 + 1 = 2，然后再将2 + 1 = 3
+    // 最后返回的JavaPairRDD中的元素，也是tuple，但是第一个值就是每个key，第二个值就是key的value
+    // reduce之后的结果，相当于就是每个单词出现的次数
+    JavaPairRDD&lt;String, Integer&gt; wordCounts = pairs.reduceByKey(
+
+            new Function2&lt;Integer, Integer, Integer&gt;() {
+
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public Integer call(Integer v1, Integer v2) throws Exception {
+                    return v1 + v2;
+                }
+
+            });
+
+    // 到这里为止，我们通过几个Spark算子操作，已经统计出了单词的次数
+    // 但是，之前我们使用的flatMap、mapToPair、reduceByKey这种操作，都叫做transformation操作
+    // 一个Spark应用中，光是有transformation操作，是不行的，是不会执行的，必须要有一种叫做action
+    // 接着，最后，可以使用一种叫做action操作的，比如说，foreach，来触发程序的执行
+    wordCounts.foreach(new VoidFunction&lt;Tuple2&lt;String,Integer&gt;&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void call(Tuple2&lt;String, Integer&gt; wordCount) throws Exception {
+            System.out.println(wordCount._1 + &quot; appeared &quot; + wordCount._2 + &quot; times.&quot;);    
+        }
+
+    });
+
+    sc.close();
+  }
+</code></pre><p>`</p>
+<h3 id="RDD持久化操作"><a href="#RDD持久化操作" class="headerlink" title="RDD持久化操作"></a>RDD持久化操作</h3><ol>
+<li><p>Spark的一个重要功能是将RDD存储在持久化的内存中,当对RDD进行持久化操作的时候,可以直接使用该RDD，不用反复计算。</p>
+</li>
+<li><p>持久化操作有cache()和persist(),cache（）是底层调用persist()<br>的无参数版本,同时调用persist(MEMORY_ONLY)，将数据持久化到内存中,如果底层需要从内存中清楚缓存可以使用unpersist()方法。</p>
+</li>
+<li><p>持久化数据进行多路复用,只要调用persist()传入对应的StorageLevel即可</p>
+</li>
+<li><p>持久化级别：</p>
+<ul>
+<li><p>MEMORY_ONLY:以非序列化方式java对象持久化在JVM中，无法存储的在下次会重新进行计算</p>
+</li>
+<li><p>MEMORY_AND_DISK:当某些partition无法存储在内存中,会持久化到磁盘上</p>
+</li>
+<li><p>MEMORY_ONLY_SER:同MEMORY_ONLY但是会以序列化的方式存储在JVM上</p>
+</li>
+<li>MEMORY_AND_DSK_SER:同MEMORY_AND_DSK但是使用序列化方式持久化java对象</li>
+<li>DISK_ONLY:使用非序列化方式持久化，完全存储在磁盘上</li>
+<li>MEMORY_ONLY_2(MEMORY_AND_DISK_2):加上2持久化的级别表示,将会持久化的数据复制一份，保存在从节点，从而使数据丢失时只需要使用备份数据即可</li>
+</ul>
+</li>
+</ol>
+<p>注意:优先使用MEMORY_ONLY ,MEMORY_ONLY_SER次之，怕丢失数据采用带_2标志的。最好不要采用持久化磁盘。</p>
+<p>###共享变量（Broadcast Variable和Accumulator）<br>1.原理图:<br><img src="http://i.imgur.com/9jaT3e0.png" alt=""></p>
+<ol>
+<li>Spark共享变量两种:Broadcast广播变量(只能读),Accumulator累加变量，两个都是通过value()方法获取。</li>
+</ol>
+<p>代码示例(Accumulator):<br>    `    </p>
+<pre><code>    public static void main(String[] args) {
+    SparkConf conf = new SparkConf()
+            .setAppName(&quot;Accumulator&quot;) 
+            .setMaster(&quot;local&quot;);
+    JavaSparkContext sc = new JavaSparkContext(conf);
+
+    // 创建Accumulator变量
+    // 需要调用SparkContext的accumulator()方法
+    final Accumulator&lt;Integer&gt; sum = sc.accumulator(0);
+
+    List&lt;Integer&gt; numberList = Arrays.asList(1, 2, 3, 4, 5);
+    JavaRDD&lt;Integer&gt; numbers = sc.parallelize(numberList);
+
+    numbers.foreach(new VoidFunction&lt;Integer&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void call(Integer t) throws Exception {
+            // 然后在函数内部，就可以对Accumulator变量，调用add()方法，累加值
+            sum.add(t);  
+        }
+
+    });
+
+    // 在driver程序中，可以调用Accumulator的value()方法，获取其值
+    System.out.println(sum.value());  
+
+    sc.close();
+}`
+</code></pre><p>代码示例(Broadcast Variable):<br>    `</p>
+<pre><code>public static void main(String[] args) {
+    SparkConf conf = new SparkConf()
+            .setAppName(&quot;BroadcastVariable&quot;) 
+            .setMaster(&quot;local&quot;); 
+    JavaSparkContext sc = new JavaSparkContext(conf);
+
+    // 在java中，创建共享变量，就是调用SparkContext的broadcast()方法
+    // 获取的返回结果是Broadcast&lt;T&gt;类型
+    final int factor = 3;
+    final Broadcast&lt;Integer&gt; factorBroadcast = sc.broadcast(factor);
+
+    List&lt;Integer&gt; numberList = Arrays.asList(1, 2, 3, 4, 5);
+
+    JavaRDD&lt;Integer&gt; numbers = sc.parallelize(numberList);
+
+    // 让集合中的每个数字，都乘以外部定义的那个factor
+    JavaRDD&lt;Integer&gt; multipleNumbers = numbers.map(new Function&lt;Integer, Integer&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Integer call(Integer v1) throws Exception {
+            // 使用共享变量时，调用其value()方法，即可获取其内部封装的值
+            int factor = factorBroadcast.value();
+            return v1 * factor;
+        }
+
+    });
+
+    multipleNumbers.foreach(new VoidFunction&lt;Integer&gt;() {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public void call(Integer t) throws Exception {
+            System.out.println(t);  
+        }
+
+    });
+
+    sc.close();
+}
+`
+</code></pre><h3 id="Spark内核架构深度剖析"><a href="#Spark内核架构深度剖析" class="headerlink" title="Spark内核架构深度剖析"></a>Spark内核架构深度剖析</h3>
       
     </div>
     
@@ -451,19 +836,74 @@
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
 
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://51nw.net/images/wechat-reward-image.gif" alt="shzcore WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://51nw.net/images/wechat-reward-image.gif" alt="shzcore Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    shzcore
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://51nw.net/2017/08/22/Spark/" title="Spark内核源码">http://51nw.net/2017/08/22/Spark/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Spark内核源码/" rel="tag"># Spark内核源码</a>
+          
+            <a href="/tags/Spark配置/" rel="tag"># Spark配置</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -473,10 +913,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -484,6 +925,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
 
         </div>
         
@@ -504,8 +951,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -620,6 +1076,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark"><span class="nav-number">1.</span> <span class="nav-text">Spark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark部署发布"><span class="nav-number">1.1.</span> <span class="nav-text">Spark部署发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark运行模式"><span class="nav-number">1.2.</span> <span class="nav-text">Spark运行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark架构原理"><span class="nav-number">1.3.</span> <span class="nav-text">Spark架构原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transformation-和-action操作"><span class="nav-number">1.4.</span> <span class="nav-text">transformation 和 action操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD持久化操作"><span class="nav-number">1.5.</span> <span class="nav-text">RDD持久化操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark内核架构深度剖析"><span class="nav-number">1.6.</span> <span class="nav-text">Spark内核架构深度剖析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -760,10 +1232,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
@@ -798,7 +1270,18 @@
 
 
   
-    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytb2SlAs"></script>
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytb2SlAs';
+      var conf = '41c204ae3fa67d75512227c87264d670';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
 
 
